@@ -41,7 +41,7 @@ func (p *ProviderSolver) Present(ch *v1alpha1.ChallengeRequest) error {
 	domainName := ptr.Pointer(strings.TrimSuffix(ch.ResolvedZone, "."))
 	recordOptions := &bunny.AddOrUpdateDNSRecordOptions{
 		Type:  ptr.Pointer(bunny.DNSRecordTypeTXT),
-		Name:  ptr.Pointer(strings.TrimSuffix(ch.ResolvedFQDN, ptr.Deref(domainName))),
+		Name:  ptr.Pointer(ch.ResolvedFQDN),
 		Value: ptr.Pointer(strconv.Quote(ch.Key)),
 		TTL:   ptr.Pointer(int32(60)),
 	}
